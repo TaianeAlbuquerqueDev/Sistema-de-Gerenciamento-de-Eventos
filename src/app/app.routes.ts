@@ -12,7 +12,7 @@ export const routes: Routes = [
         // Rotas admin
         path: "admin", children: [
             {path: "dashboard", component: Dashboard},
-            {path: "event-form", component: EventForm}
+            {path: "eventos", component: EventForm}
         ]
     }
 ];
