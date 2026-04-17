@@ -1,1 +1,54 @@
-<p>dashboard works!</p>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid px-4">
+
+    <!-- Marca da área admin -->
+    <a class="navbar-brand fw-bold" routerLink="/admin/events">
+      ⚙️ Painel Admin
+    </a>
+
+    <!-- Botão hambúrguer para mobile -->
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#adminNav"
+      aria-controls="adminNav"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="adminNav">
+
+      <ul class="navbar-nav me-auto gap-1">
+        <li class="nav-item">
+
+          <a
+            class="nav-link"
+            routerLink="/admin/events"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+          >
+            Eventos
+          </a>
+        </li>
+        
+      </ul>
+
+      <div class="d-flex align-items-center gap-2">
+        <a routerLink="/events" class="btn btn-outline-light btn-sm">
+          ← Ver site
+        </a>
+        <button class="btn btn-outline-danger btn-sm" (click)="auth.logout()">
+          Sair
+        </button>
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+<div class="container-fluid py-4 px-4">
+  <router-outlet />
+</div>
