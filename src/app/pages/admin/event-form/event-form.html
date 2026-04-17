@@ -1,4 +1,3 @@
-<!-- 
 <h2 class="fw-bold mb-4">📋 Gerenciar Eventos</h2>
 
 @if (successMessage()) {
@@ -31,9 +30,9 @@
           <thead class="table-dark">
             <tr>
               <th>Nome</th>
-              <th>Categoria</th>
-              <th>Distrito</th>
-              <th>Ingresso</th>
+              <th>Data</th>
+              <th>Vagas Ocupadas/Totais</th>
+              <th>Status</th>
               <th class="text-center">Ações</th>
             </tr>
           </thead>
@@ -43,7 +42,7 @@
               <tr>
                 <td class="fw-semibold">{{ spot.name }}</td>
                 <td>{{ spot.category }}</td>
-                <td>{{ spot.district }}</td>
+                <td>{{ spot.date_time }}</td>
                 <td>
                   @if (spot.requires_ticket) {
                     <span class="badge bg-warning text-dark">Pago</span>
@@ -121,14 +120,24 @@
         </div>
 
         <div class="col-12">
-          <label for="spotDescription" class="form-label fw-semibold">Descrição *</label>
+          <label for="spotDateTime" class="form-label fw-semibold">Data e Hora *</label>
+          <input
+            type="datetime-local"
+            class="form-control"
+            id="spotDateTime"
+            formControlName="date_time"
+          />
+        </div>
+
+        <div class="col-12">
+          <label for="spotLocation" class="form-label fw-semibold">Localização *</label>
           <textarea
             class="form-control"
-            id="spotDescription"
-            formControlName="description"
+            id="spotLocation"
+            formControlName="location"
             rows="3"
             maxlength="200"
-            placeholder="Descreva o evento (máx. 200 caracteres)"
+            placeholder="Descreva o local do evento (máx. 200 caracteres)"
           ></textarea>
          
           <div class="form-text">
@@ -137,37 +146,14 @@
         </div>
 
         <div class="col-md-4">
-          <label for="spotDistrict" class="form-label fw-semibold">Distrito *</label>
+          <label for="spotMaxCapacity" class="form-label fw-semibold">Capacidade Máxima *</label>
           <input
             type="text"
             class="form-control"
-            id="spotDistrict"
-            formControlName="district"
-            placeholder="Distrito"
+            id="spotMaxCapacity"
+            formControlName="max_capacity"
+            placeholder="Capacidade máxima"
             [attr.disabled]="isEditing() ? '' : null"
-          />
-        </div>
-
-        <div class="col-md-4">
-          <label for="spotLat" class="form-label fw-semibold">Latitude *</label>
-          <input
-            type="number"
-            class="form-control"
-            id="spotLat"
-            formControlName="latitude"
-            step="0.0001"
-            placeholder="Ex: 31.2304"
-          />
-        </div>
-        <div class="col-md-4">
-          <label for="spotLng" class="form-label fw-semibold">Longitude *</label>
-          <input
-            type="number"
-            class="form-control"
-            id="spotLng"
-            formControlName="longitude"
-            step="0.0001"
-            placeholder="Ex: 121.4737"
           />
         </div>
 
@@ -240,5 +226,3 @@
     </form>
   </div>
 </div> 
-
- -->
