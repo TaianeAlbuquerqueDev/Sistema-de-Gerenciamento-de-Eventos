@@ -23,10 +23,10 @@ export class Login implements OnInit {
 
   errorMessage = signal<string>('');
   isLoading = signal(false);
-
+  
   loginForm: FormGroup = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
-    password: ['', [Validators.required]]
+    password: ['', [Validators.required, Validators.minLength(6)]]
   });
 
   ngOnInit(): void {
