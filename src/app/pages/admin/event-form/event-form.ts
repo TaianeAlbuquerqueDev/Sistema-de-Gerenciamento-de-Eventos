@@ -1,14 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import { Event, RouterModule } from '@angular/router';
 import { EventFilters, EventService } from '../../../services/event';
-import { Navbar } from "../../../components/navbar/navbar";
 
 @Component({
   selector: 'app-event-form',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RouterModule, Navbar],
+  imports: [CommonModule, ReactiveFormsModule, RouterModule],
   templateUrl: './event-form.html',
   styleUrl: './event-form.css',
 })
@@ -89,7 +88,7 @@ export class EventForm implements OnInit {
   }
 
   deleteSpot(id: number): void {
-    if (!confirm('Tem certeza que deseja excluir este ponto turístico?')) return;
+    if (!confirm('Tem certeza que deseja excluir este evento?')) return;
     this.clearMessages();
 
     this.eventService.delete(id).subscribe({

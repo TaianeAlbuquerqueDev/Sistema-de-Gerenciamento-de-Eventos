@@ -1,14 +1,14 @@
 <h2 class="fw-bold mb-4">📋 Gerenciar Eventos</h2>
 
 @if (successMessage()) {
-  <div class="alert alert-success alert-dismissible" role="alert">
-    ✅ {{ successMessage() }}
-  </div>
+<div class="alert alert-success alert-dismissible" role="alert">
+  ✅ {{ successMessage() }}
+</div>
 }
 @if (errorMessage()) {
-  <div class="alert alert-danger alert-dismissible" role="alert">
-    ⚠️ {{ errorMessage() }}
-  </div>
+<div class="alert alert-danger alert-dismissible" role="alert">
+  ⚠️ {{ errorMessage() }}
+</div>
 }
 
 <div class="card mb-4">
@@ -18,64 +18,58 @@
   <div class="card-body p-0">
 
     @if (isLoadingList()) {
-      <div class="text-center py-4">
-        <div class="spinner-border text-primary" role="status">
-          <span class="visually-hidden">Carregando…</span>
-        </div>
+    <div class="text-center py-4">
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Carregando…</span>
       </div>
+    </div>
     } @else {
-      
-      <div class="table-responsive">
-        <table class="table table-striped table-hover table-bordered mb-0">
-          <thead class="table-dark">
-            <tr>
-              <th>Nome</th>
-              <th>Data</th>
-              <th>Vagas Ocupadas/Totais</th>
-              <th>Status</th>
-              <th class="text-center">Ações</th>
-            </tr>
-          </thead>
-          <tbody>
-           
-            @for (spot of spots(); track spot.id) {
-              <tr>
-                <td class="fw-semibold">{{ spot.name }}</td>
-                <td>{{ spot.category }}</td>
-                <td>{{ spot.date_time }}</td>
-                <td>
-                  @if (spot.requires_ticket) {
-                    <span class="badge bg-warning text-dark">Pago</span>
-                  } @else {
-                    <span class="badge bg-success">Gratuito</span>
-                  }
-                </td>
-                <td class="text-center">
-                 
-                  <button
-                    class="btn btn-sm btn-outline-primary me-1"
-                    (click)="editSpot(spot)"
-                  >
-                    ✏️ Editar
-                  </button>
-                  <button
-                    class="btn btn-sm btn-outline-danger"
-                    (click)="deleteSpot(spot.id)"
-                  >
-                    🗑️ Excluir
-                  </button>
-                </td>
-              </tr>
-            } @empty {
-              <tr>
-                <td colspan="5" class="text-center text-muted py-3">
-                  Nenhum evento cadastrado ainda.
-                </td>
-              </tr>
-            }
-          </tbody>
-        </table>
-      </div>
+
+    <div class="table-responsive">
+      <table class="table table-striped table-hover table-bordered mb-0">
+        <thead class="table-dark">
+          <tr>
+            <th>Nome</th>
+            <th>Data</th>
+            <th>Vagas Ocupadas/Totais</th>
+            <th>Status</th>
+            <th class="text-center">Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+
+          @for (spot of spots(); track spot.id) {
+          <tr>
+            <td class="fw-semibold">{{ spot.name }}</td>
+            <td>{{ spot.category }}</td>
+            <td>{{ spot.date_time }}</td>
+            <td>
+              @if (spot.requires_ticket) {
+              <span class="badge bg-warning text-dark">Pago</span>
+              } @else {
+              <span class="badge bg-success">Gratuito</span>
+              }
+            </td>
+            <td class="text-center">
+
+              <button class="btn btn-sm btn-outline-primary me-1" (click)="editSpot(spot)">
+                ✏️ Editar
+              </button>
+              <button class="btn btn-sm btn-outline-danger" (click)="deleteSpot(spot.id)">
+                🗑️ Excluir
+              </button>
+            </td>
+          </tr>
+          } @empty {
+          <tr>
+            <td colspan="5" class="text-center text-muted py-3">
+              Nenhum evento cadastrado ainda.
+            </td>
+          </tr>
+          }
+        </tbody>
+      </table>
+    </div>
     }
 
   </div>
@@ -83,12 +77,9 @@
 
 
 <div class="card">
-  
-  <div class="card-header fw-semibold"
-       [class.bg-warning]="isEditing()"
-       [class.bg-success]="!isEditing()"
-       [class.text-dark]="isEditing()"
-       [class.text-white]="!isEditing()">
+
+  <div class="card-header fw-semibold" [class.bg-warning]="isEditing()" [class.bg-success]="!isEditing()"
+    [class.text-dark]="isEditing()" [class.text-white]="!isEditing()">
     {{ isEditing() ? '✏️ Editando evento' : '➕ Novo evento' }}
   </div>
   <div class="card-body">
@@ -98,48 +89,30 @@
 
         <div class="col-md-6">
           <label for="spotName" class="form-label fw-semibold">Nome *</label>
-          <input
-            type="text"
-            class="form-control"
-            id="spotName"
-            formControlName="name"
-            placeholder="Nome do evento"
-            [attr.disabled]="isEditing() ? '' : null"
-          />
+          <input type="text" class="form-control" id="spotName" formControlName="name" placeholder="Nome do evento"
+            [attr.disabled]="isEditing() ? '' : null" />
         </div>
 
         <div class="col-md-6">
           <label for="spotCategory" class="form-label fw-semibold">Categoria *</label>
-          <input
-            type="text"
-            class="form-control"
-            id="spotCategory"
-            formControlName="category"
-            placeholder="Ex: Festa Junina, Festival de Música, etc."
-          />
+          <input type="text" class="form-control" id="spotCategory" formControlName="category"
+            placeholder="Ex: Festa Junina, Festival de Música, etc." />
         </div>
 
         <div class="col-12">
           <label for="spotDateTime" class="form-label fw-semibold">Data e Hora *</label>
-          <input
-            type="datetime-local"
-            class="form-control"
-            id="spotDateTime"
-            formControlName="date_time"
-          />
+          <input type="datetime-local" class="form-control" id="spotDateTime" formControlName="date_time" />
         </div>
 
         <div class="col-12">
           <label for="spotLocation" class="form-label fw-semibold">Localização *</label>
-          <textarea
-            class="form-control"
-            id="spotLocation"
-            formControlName="location"
-            rows="3"
-            maxlength="200"
-            placeholder="Descreva o local do evento (máx. 200 caracteres)"
-          ></textarea>
-         
+          <input type="text" class="form-control" id="spotLocation" formControlName="location" placeholder="Endereço">
+        </div>
+
+        <div class="col-12">
+          <label for="spotDescription" class="form-label fw-semibold">Descrição *</label>
+          <textarea class="form-control" id="spotDescription" formControlName="description" rows="3" maxlength="200"
+            placeholder="Descreva o evento (máx. 200 caracteres)"></textarea>
           <div class="form-text">
             {{ spotForm.get('description')?.value?.length || 0 }} / 200 caracteres
           </div>
@@ -147,24 +120,13 @@
 
         <div class="col-md-4">
           <label for="spotMaxCapacity" class="form-label fw-semibold">Capacidade Máxima *</label>
-          <input
-            type="text"
-            class="form-control"
-            id="spotMaxCapacity"
-            formControlName="max_capacity"
-            placeholder="Capacidade máxima"
-            [attr.disabled]="isEditing() ? '' : null"
-          />
+          <input type="text" class="form-control" id="spotMaxCapacity" formControlName="max_capacity"
+            placeholder="Capacidade máxima" [attr.disabled]="isEditing() ? '' : null" />
         </div>
 
         <div class="col-md-4">
           <div class="form-check mt-2">
-            <input
-              class="form-check-input"
-              type="checkbox"
-              id="spotTicket"
-              formControlName="requires_ticket"
-            />
+            <input class="form-check-input" type="checkbox" id="spotTicket" formControlName="requires_ticket" />
             <label class="form-check-label fw-semibold" for="spotTicket">
               Exige ingresso?
             </label>
@@ -175,54 +137,40 @@
           <label for="spotImages" class="form-label fw-semibold">
             Imagens {{ isEditing() ? '(opcional — mantém as atuais se não selecionar)' : '*' }}
           </label>
-          
-          <input
-            type="file"
-            class="form-control"
-            id="spotImages"
-            accept=".jpg,.png"
-            multiple
-            (change)="onFilesSelected($event)"
-          />
+
+          <input type="file" class="form-control" id="spotImages" accept=".jpg,.png" multiple
+            (change)="onFilesSelected($event)" />
           <div class="form-text">Máximo de 5 arquivos. Formatos: .jpg ou .png</div>
 
           @if (isEditing() && editingSpot()?.images?.length) {
-            <div class="mt-2">
-              <small class="text-muted">Imagens atuais:</small>
-              <div class="d-flex flex-wrap gap-2 mt-1">
-                @for (img of editingSpot()!.images; track img.id) {
-                  <img
-                    [src]="img.file_url"
-                    [alt]="'Imagem'"
-                    class="existing-thumb rounded border"
-                  />
-                }
-              </div>
+          <div class="mt-2">
+            <small class="text-muted">Imagens atuais:</small>
+            <div class="d-flex flex-wrap gap-2 mt-1">
+              @for (img of editingSpot()!.images; track img.id) {
+              <img [src]="img.file_url" [alt]="'Imagem'" class="existing-thumb rounded border" />
+              }
             </div>
+          </div>
           }
         </div>
 
       </div>
 
       <div class="d-flex gap-2 mt-4">
-        <button
-          type="submit"
-          class="btn btn-success"
-          [disabled]="spotForm.invalid || isSubmitting()"
-        >
+        <button type="submit" class="btn btn-success" [disabled]="spotForm.invalid || isSubmitting()">
           @if (isSubmitting()) {
-            <span class="spinner-border spinner-border-sm me-1" role="status"></span>
+          <span class="spinner-border spinner-border-sm me-1" role="status"></span>
           }
           {{ isEditing() ? '💾 Atualizar' : '✅ Criar evento' }}
         </button>
 
         @if (isEditing()) {
-          <button type="button" class="btn btn-outline-secondary" (click)="cancelEdit()">
-            ✖ Cancelar edição
-          </button>
+        <button type="button" class="btn btn-outline-secondary" (click)="cancelEdit()">
+          ✖ Cancelar edição
+        </button>
         }
       </div>
 
     </form>
   </div>
-</div> 
+</div>

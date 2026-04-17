@@ -1,6 +1,6 @@
 
 import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/core';
-import { provideRouter } from '@angular/router';
+import { provideRouter, withHashLocation } from '@angular/router';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { routes } from './app.routes';
 import { authInterceptor } from './interceptors/auth-interceptor';
@@ -9,8 +9,9 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
 
-    provideRouter(routes),
+    provideRouter(routes, withHashLocation()),
 
-    provideHttpClient(withInterceptors([authInterceptor]))
+    provideHttpClient()
+    //NATHAN PEDIU PRA DEIXAR ESSE PARÊNTESES DEBAIXO VAZIO, QUALQUER COISA APAGAR ou colocar no parentese: provideHttpClient(withInterceptors([authInterceptor]))
   ]
 };

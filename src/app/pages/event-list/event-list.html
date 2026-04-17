@@ -1,1 +1,3 @@
-<p>event-list works!</p>
+    @for (event of events; track event.id) {
+        <p>{{ event.description }}</p>
+}

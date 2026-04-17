@@ -10,18 +10,18 @@
                 <li class="nav-item">
                     <a class="nav-link" [routerLink]="['/home']">Home</a>
                 </li>
-                @if (auth.isLoggedIn()) {
+                @if (authService.isLoggedIn()) {
                 <li class="nav-item">
                     <a class="nav-link" [routerLink]="['/admin/dashboard']"
                         routerLinkActive="active fw-semibold">Dashboard</a>
                 </li>
 
                 <li class="nav-item">
-                    <button class="btn btn-danger ms-2" (click)="auth.logout()">Sair</button>
+                    <button class="btn btn-danger ms-2" (click)="authService.logout()">Sair</button>
                 </li>
                 } @else {
                 <li class="nav-item">
-                    <a class="nav-link" [routerLink]="['/login']"  routerLinkActive="active fw-semibold">Login</a>
+                    <a class="nav-link" [routerLink]="['/login']" routerLinkActive="active fw-semibold">Login</a>
                 </li>
                 }
 
@@ -30,5 +30,4 @@
     </div>
 </nav>
 
-<!-- Espaçador para compensar a navbar fixa e o conteúdo não ficar escondido atrás dela -->
 <div class="navbar-spacer"></div>

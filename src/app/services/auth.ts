@@ -7,39 +7,36 @@ export class Auth {
 
   private http = inject(HttpClient);
   private router = inject(Router);
-  private apiUrl = "https://api-senai-angular.vercel.app/api/events";
+  private apiUrl = "https://api-senai-angular.vercel.app/api/auth";
+  private TOKEN_KEY= "auth_token";
 
-login(email: string, password: string): Observable<{ token: string }> {
-  return this.http.post<{ token: string }>(`${this.apiUrl}/auth/login`, { email, password }).pipe(
-    tap(response => {
-      localStorage.setItem('token', response.token);
-    })
-  );
-}
- 
+  login(email: string, password: string): Observable<any> {
+    return this.http.post<{token: string}>(this.apiUrl + "/login", {email, password})
+    .pipe(tap((resp) => {localStorage.setItem(this.TOKEN_KEY, resp.token);
+    }))
+  }
+
   logout(): void {
-    localStorage.removeItem('token');
+    localStorage.removeItem(this.TOKEN_KEY);
     this.router.navigate(['/login']);
   }
 
   isLoggedIn(): boolean {
-    return !!localStorage.getItem('token');
+    return !!this.getToken();
   }
 
-  // Retorna o token atual (ou null se não existir)
   getToken(): string | null {
-    return localStorage.getItem('token');
+    return localStorage.getItem(this.TOKEN_KEY);
   }
 
-  getRole(): string | null {
-    const token = this.getToken();
-    if (!token) return null;
-    try {
-      
-      const payload = JSON.parse(atob(token.split('.')[1]));
-      return payload.role ?? null;
-    } catch {
-      return null;
-    }
-  }
+  // getRole(): string | null {
+  //   const token = this.getToken();
+  //   if (!token) return null;
+  //   try {
+  //     const payload = JSON.parse(atob(token.split('.')[1]));
+  //     return payload.role ?? null;
+  //   } catch {
+  //     return null;
+  //   }
+  // }
 }

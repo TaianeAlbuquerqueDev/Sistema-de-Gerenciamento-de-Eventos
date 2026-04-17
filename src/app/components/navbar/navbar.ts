@@ -11,6 +11,6 @@ import { Auth } from '../../services/auth';
 })
 export class Navbar {
 
-    auth = inject(Auth);
+ public authService = inject(Auth);
 
  }

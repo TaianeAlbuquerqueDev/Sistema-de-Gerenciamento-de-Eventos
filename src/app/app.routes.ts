@@ -14,7 +14,7 @@ export const routes: Routes = [
         path: "admin",
         canActivate: [authGuard],
         children: [
-            { path: "", redirectTo: "dashboard", pathMatch: 'full' },
+            // { path: "", redirectTo: "dashboard", pathMatch: 'full' },
             { path: "dashboard", component: Dashboard },
             { path: "events", component: EventForm }
         ]
