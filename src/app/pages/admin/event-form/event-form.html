@@ -1,4 +1,4 @@
-<!--
+<!-- 
 <h2 class="fw-bold mb-4">📋 Gerenciar Eventos</h2>
 
 @if (successMessage()) {
@@ -104,7 +104,7 @@
             class="form-control"
             id="spotName"
             formControlName="name"
-            placeholder="Nome do ponto turístico"
+            placeholder="Nome do evento"
             [attr.disabled]="isEditing() ? '' : null"
           />
         </div>
@@ -116,7 +116,7 @@
             class="form-control"
             id="spotCategory"
             formControlName="category"
-            placeholder="Ex: Templo, Museu, Parque"
+            placeholder="Ex: Festa Junina, Festival de Música, etc."
           />
         </div>
 
@@ -128,7 +128,7 @@
             formControlName="description"
             rows="3"
             maxlength="200"
-            placeholder="Descreva o ponto turístico (máx. 200 caracteres)"
+            placeholder="Descreva o evento (máx. 200 caracteres)"
           ></textarea>
          
           <div class="form-text">
@@ -227,7 +227,7 @@
           @if (isSubmitting()) {
             <span class="spinner-border spinner-border-sm me-1" role="status"></span>
           }
-          {{ isEditing() ? '💾 Atualizar' : '✅ Criar ponto' }}
+          {{ isEditing() ? '💾 Atualizar' : '✅ Criar evento' }}
         </button>
 
         @if (isEditing()) {
@@ -241,5 +241,4 @@
   </div>
 </div> 
 
-
--->
+ -->
