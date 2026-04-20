@@ -1,3 +1,18 @@
-    @for (event of events; track event.id) {
-        <p>{{ event.description }}</p>
-}
+<section>
+    <h2 class="mb-3">Eventos</h2>
+    @if (isLoading()) {
+    <div class="text-center py-5">
+        <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Carregando...</span>
+        </div>
+    </div>
+    } @else if (spots().length === 0) {
+    <div class="alert alert-info"> Nenhum evento encontrado!</div>
+    }@else {
+    <div class="row row-cols-md-3 g-4">
+        @for (event of spots(); track $index) {
+            <app-event-card [event]="event"></app-event-card>
+        }
+    </div>
+    }
+</section>

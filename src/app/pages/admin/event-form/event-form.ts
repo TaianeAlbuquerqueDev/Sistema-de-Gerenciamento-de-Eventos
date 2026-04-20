@@ -33,7 +33,7 @@ export class EventForm implements OnInit {
     location: ['', [Validators.required, Validators.maxLength(200)]],
     max_capacity: ['', [Validators.required, Validators.min(1)]],
     description: ['', [Validators.required, Validators.maxLength(200)]],
-
+    
     requires_ticket: [false]
   });
 

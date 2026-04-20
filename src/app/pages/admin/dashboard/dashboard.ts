@@ -12,5 +12,4 @@ import { Auth } from '../../../services/auth';
 })
 export class Dashboard {
     auth = inject(Auth);
-
 }

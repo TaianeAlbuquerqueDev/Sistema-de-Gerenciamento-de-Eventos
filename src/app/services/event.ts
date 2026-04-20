@@ -3,43 +3,47 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 export interface EventFilters {
-    date_time: any;
-    name?: string;
     requires_ticket?: boolean;
-    category?: string;
-    location?: string;
-    max_capacity?: number;
-    description?: string;
-    id: number;
     images?: { id: number, file_url: string }[];
+
+    id: number;
+    name: string;
+    category: string;
+    date_time: Date | string;
+    location: string;
+    description: string;
+    max_capacity: number;
+    registered_count: number;
+    created_at?: Date | string;
+    updated_at?: Date | string;
 }
 @Injectable({ providedIn: 'root' })
 export class EventService {
     private http = inject(HttpClient);
     private apiUrl = "https://api-senai-angular.vercel.app/api";
-    private publicUrl = "/events";
-    private adminUrl = "/admin/events";
+    // private publicUrl = "/events";
+    // private adminUrl = "/admin/events";
 
 
-    getAll(): Observable<any> {
+    // getAll(filters?: EventFilters): Observable<any> {
 
-        return this.http.get(this.apiUrl + this.publicUrl);
-    }
-
-    // getAll(filters?: any): Observable<EventFilters[]> {
-    //     let params = new HttpParams();
-
-    //     if (filters) {
-    //         if (filters.date_time) {
-    //             params = params.set('date_time', filters.date_time);
-    //         }
-    //         if (filters.category) {
-    //             params = params.set('category', filters.category);
-    //         }
-    //     }
-
-    //     return this.http.get<EventFilters[]>(`${this.apiUrl}/events`, { params });
+    //     return this.http.get(this.apiUrl + this.publicUrl);
     // }
+
+    getAll(filters?: any): Observable<EventFilters[]> {
+        let params = new HttpParams();
+
+        if (filters) {
+            if (filters.date_time) {
+                params = params.set('date_time', filters.date_time);
+            }
+            if (filters.category) {
+                params = params.set('category', filters.category);
+            }
+        }
+
+        return this.http.get<EventFilters[]>(`${this.apiUrl}/events`, { params });
+    }
 
     getById(id: number): Observable<EventFilters> {
         return this.http.get<EventFilters>(`${this.apiUrl}/events/${id}`);
