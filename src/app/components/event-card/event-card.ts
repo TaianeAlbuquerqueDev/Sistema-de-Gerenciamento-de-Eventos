@@ -13,5 +13,4 @@ import { EventFilters } from '../../services/event';
 })
 export class EventCard {
 event = input.required<EventFilters>();
-// spot: any;
 }

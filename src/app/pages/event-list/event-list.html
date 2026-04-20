@@ -9,9 +9,11 @@
     } @else if (spots().length === 0) {
     <div class="alert alert-info"> Nenhum evento encontrado!</div>
     }@else {
-    <div class="row row-cols-md-3 g-4">
-        @for (event of spots(); track $index) {
-            <app-event-card [event]="event"></app-event-card>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        @for (event of spots(); track event.id) {
+            <div class="col">
+                <app-event-card [event]="event"></app-event-card>
+            </div>
         }
     </div>
     }

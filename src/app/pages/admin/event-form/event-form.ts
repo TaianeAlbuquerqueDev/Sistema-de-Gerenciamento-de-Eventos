@@ -45,7 +45,7 @@ export class EventForm implements OnInit {
     this.isLoadingList.set(true);
     this.eventService.getAll().subscribe({
       next: (data) => {
-        this.spots.set(data);
+        this.spots.set(data.filter(spot => spot && spot.id && spot.name));
         this.isLoadingList.set(false);
       },
       error: () => {

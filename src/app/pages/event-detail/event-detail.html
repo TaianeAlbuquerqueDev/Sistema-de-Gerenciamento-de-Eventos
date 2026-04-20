@@ -1,0 +1,85 @@
+<div class="container py-4">
+
+  <!-- Botão voltar -->
+  <button class="btn btn-outline-secondary btn-sm mb-4" (click)="goBack()">
+    ← Voltar
+  </button>
+
+  @if (isLoading()) {
+    <div class="text-center py-5">
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Carregando...</span>
+      </div>
+    </div>
+
+  } @else if (!event()) {
+    <div class="alert alert-danger">Evento não encontrado.</div>
+
+  } @else {
+
+    <!-- Imagem -->
+    @if (event()!.images && event()!.images!.length > 0) {
+      <img [src]="event()!.images![0].file_url" [alt]="event()!.name"
+           class="img-fluid rounded-3 mb-4 w-100 detail-img" />
+    } @else {
+      <div class="detail-img-placeholder rounded-3 mb-4 d-flex align-items-center justify-content-center bg-light">
+        <span style="font-size: 5rem;">📷</span>
+      </div>
+    }
+
+    <!-- Nome e badges -->
+    <div class="d-flex flex-wrap align-items-center gap-2 mb-2">
+      <h2 class="fw-bold mb-0">{{ event()!.name }}</h2>
+      @if (event()!.requires_ticket) {
+        <span class="badge bg-warning text-dark">💰 Exige ingresso</span>
+      } @else {
+        <span class="badge bg-success">✅ Entrada gratuita</span>
+      }
+    </div>
+
+    <!-- Categoria e local -->
+    <div class="mb-3">
+      <span class="badge bg-secondary me-1">{{ event()!.category }}</span>
+      <span class="badge bg-light text-dark border">📍 {{ event()!.location }}</span>
+    </div>
+
+    <!-- Data e local -->
+    <p class="text-muted mb-3">
+      🗓️ {{ event()!.date_time | date:'dd/MM/yyyy HH:mm' }}
+    </p>
+
+    <!-- Descrição -->
+    <p class="lead mb-4">{{ event()!.description }}</p>
+
+    <!-- Capacidade -->
+    <div class="card mb-4 p-3 border-0 bg-light rounded-3">
+      <div class="d-flex justify-content-between align-items-center mb-1">
+        <span class="text-muted small">Inscritos</span>
+        <span class="fw-bold">{{ event()!.registered_count }} / {{ event()!.max_capacity }}</span>
+      </div>
+      <div class="progress" style="height: 8px;">
+        <div class="progress-bar bg-primary" role="progressbar"
+          [style.width.%]="(event()!.registered_count / event()!.max_capacity) * 100">
+        </div>
+      </div>
+    </div>
+
+    <!-- Botão de inscrição -->
+    @if (registered()) {
+      <div class="alert alert-success">🎉 Inscrição realizada com sucesso!</div>
+    } @else {
+      <button class="btn btn-primary btn-lg w-100"
+              (click)="register()"
+              [disabled]="isRegistering() || event()!.registered_count >= event()!.max_capacity">
+        @if (isRegistering()) {
+          <span class="spinner-border spinner-border-sm me-2"></span> Inscrevendo...
+        } @else if (event()!.registered_count >= event()!.max_capacity) {
+          Vagas esgotadas
+        } @else {
+          Inscrever-se no evento
+        }
+      </button>
+    }
+
+  }
+</div>

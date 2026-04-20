@@ -11,3 +11,21 @@
     height: 200px;
     object-fit: cover; /* Corta a imagem para preencher o espaço sem distorcer */
   }
+
+
+  .event-card {
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border: none;
+}
+
+.event-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12) !important;
+}
+
+.event-img {
+  height: 180px;
+  object-fit: cover;
+}

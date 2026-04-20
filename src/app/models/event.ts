@@ -9,4 +9,6 @@ export interface EventModel {
     registered_count: number;
     created_at?: Date | string;
     updated_at?: Date | string;
+    requires_ticket?: boolean;
+    images?: { id: number, file_url: string }[];
     }

@@ -41,13 +41,16 @@
           @for (spot of spots(); track spot.id) {
           <tr>
             <td class="fw-semibold">{{ spot.name }}</td>
-            <td>{{ spot.category }}</td>
-            <td>{{ spot.date_time }}</td>
+            <td>{{ spot.date_time | date:'short' }}</td>
+            <td>{{ spot.registered_count }}/{{ spot.max_capacity }}</td>
             <td>
               @if (spot.requires_ticket) {
               <span class="badge bg-warning text-dark">Pago</span>
               } @else {
               <span class="badge bg-success">Gratuito</span>
+              }
+              @if (spot.registered_count >= spot.max_capacity) {
+              <span class="badge bg-danger ms-1">Vagas Esgotadas</span>
               }
             </td>
             <td class="text-center">

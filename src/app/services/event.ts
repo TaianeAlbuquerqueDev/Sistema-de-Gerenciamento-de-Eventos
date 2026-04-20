@@ -2,6 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
+
 export interface EventFilters {
     requires_ticket?: boolean;
     images?: { id: number, file_url: string }[];
