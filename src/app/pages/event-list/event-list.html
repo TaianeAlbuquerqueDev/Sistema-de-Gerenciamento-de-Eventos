@@ -1,20 +1,50 @@
-<section>
-    <h2 class="mb-3">Eventos</h2>
-    @if (isLoading()) {
-    <div class="text-center py-5">
-        <div class="spinner-border text-primary" role="status">
-            <span class="visually-hidden">Carregando...</span>
-        </div>
+<div class="container py-4">
+
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="fw-bold mb-0">🎫 Eventos Para Todos os Públicos!</h2>
+  </div>
+
+  <!-- Filtros -->
+  <form [formGroup]="filterForm" (ngSubmit)="applyFilters()" class="row g-2 mb-4 align-items-center">
+    <div class="col-md-4">
+      <input type="text" class="form-control" formControlName="name" placeholder="🔍 Buscar por nome..." />
     </div>
-    } @else if (spots().length === 0) {
-    <div class="alert alert-info"> Nenhum evento encontrado!</div>
-    }@else {
-    <div class="row row-cols-1 row-cols-md-3 g-4">
-        @for (event of spots(); track event.id) {
-            <div class="col">
-                <app-event-card [event]="event"></app-event-card>
-            </div>
-        }
+    <div class="col-md-3">
+      <select class="form-select" formControlName="category">
+        <option value="">🔍 Buscar por categorias...</option>
+        <option value="Workshop">Workshop</option>
+        <option value="Palestra">Palestra</option>
+        <option value="Conferência">Conferência</option>
+      </select>
+    </div>
+     <div class="col-md-3">
+    <select class="form-select" formControlName="availability">
+      <option value="">🔍 Buscar por vagas...</option>
+      <option value="available">Vagas disponíveis</option>
+      <option value="full">Vagas esgotadas</option>
+    </select>
+  </div>
+    <div class="col-md-2">
+      <button type="submit" class="btn btn-primary w-100">Filtrar</button>
+    </div>
+  </form>
+
+  @if (isLoading()) {
+  <div class="text-center py-5">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Carregando...</span>
+    </div>
+  </div>
+  } @else if (spots().length === 0) {
+  <div class="alert alert-info">Nenhum evento encontrado!</div>
+  } @else {
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    @for (event of spots(); track event.id) {
+    <div class="col">
+      <app-event-card [event]="event" />
     </div>
     }
-</section>
+  </div>
+  }
+
+</div>

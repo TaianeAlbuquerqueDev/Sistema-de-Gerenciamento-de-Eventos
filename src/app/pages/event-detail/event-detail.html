@@ -1,6 +1,5 @@
 <div class="container py-4">
 
-  <!-- Botão voltar -->
   <button class="btn btn-outline-secondary btn-sm mb-4" (click)="goBack()">
     ← Voltar
   </button>
@@ -27,15 +26,24 @@
       </div>
     }
 
-    <!-- Nome e badges -->
-    <div class="d-flex flex-wrap align-items-center gap-2 mb-2">
-      <h2 class="fw-bold mb-0">{{ event()!.name }}</h2>
-      @if (event()!.requires_ticket) {
-        <span class="badge bg-warning text-dark">💰 Exige ingresso</span>
-      } @else {
-        <span class="badge bg-success">✅ Entrada gratuita</span>
-      }
+    <!-- Datas -->
+    <div class="card bg-light border-0 mb-4">
+      <div class="card-body">
+        <div class="row text-center">
+          <div class="col-md-6 mb-2 mb-md-0">
+            <small class="text-muted d-block">Criado em</small>
+            <strong>{{ event()!.created_at | date:'dd/MM/yyyy' }}</strong>
+          </div>
+          <div class="col-md-6">
+            <small class="text-muted d-block">Atualizado em</small>
+            <strong>{{ event()!.updated_at | date:'dd/MM/yyyy' }}</strong>
+          </div>
+        </div>
+      </div>
     </div>
+
+    <!-- Nome -->
+    <h2 class="fw-bold mb-2">{{ event()!.name }}</h2>
 
     <!-- Categoria e local -->
     <div class="mb-3">
@@ -43,7 +51,7 @@
       <span class="badge bg-light text-dark border">📍 {{ event()!.location }}</span>
     </div>
 
-    <!-- Data e local -->
+    <!-- Data -->
     <p class="text-muted mb-3">
       🗓️ {{ event()!.date_time | date:'dd/MM/yyyy HH:mm' }}
     </p>

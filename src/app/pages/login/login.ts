@@ -29,7 +29,7 @@ export class Login implements OnInit {
 
   ngOnInit(): void {
     if (this.authService.isLoggedIn()) {
-      this.router.navigate(['/admin/dashboard']);
+      this.router.navigate(['/admin/events']);
     }
   }
 
@@ -40,7 +40,7 @@ export class Login implements OnInit {
     
     this.authService.login(email!, password!).subscribe({
       next: () => {
-        this.router.navigate(['/admin/dashboard']);
+        this.router.navigate(['/admin/events']);
       },
       error: (err) => {
         this.isLoading.set(false);

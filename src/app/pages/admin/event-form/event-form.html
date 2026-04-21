@@ -44,13 +44,10 @@
             <td>{{ spot.date_time | date:'short' }}</td>
             <td>{{ spot.registered_count }}/{{ spot.max_capacity }}</td>
             <td>
-              @if (spot.requires_ticket) {
-              <span class="badge bg-warning text-dark">Pago</span>
-              } @else {
-              <span class="badge bg-success">Gratuito</span>
-              }
               @if (spot.registered_count >= spot.max_capacity) {
               <span class="badge bg-danger ms-1">Vagas Esgotadas</span>
+              } @else {
+              <span class="badge bg-success">Vagas Disponíveis</span>
               }
             </td>
             <td class="text-center">
@@ -98,8 +95,13 @@
 
         <div class="col-md-6">
           <label for="spotCategory" class="form-label fw-semibold">Categoria *</label>
-          <input type="text" class="form-control" id="spotCategory" formControlName="category"
-            placeholder="Ex: Festa Junina, Festival de Música, etc." />
+          <select class="form-select" id="spotCategory" formControlName="category">
+            <option value="">Selecione...</option>
+            <option value="Workshop">Workshop</option>
+            <option value="Palestra">Palestra</option>
+            <option value="Conferência">Conferência</option>
+            <option value="Disponibilidade">Disponibilidade</option>
+          </select>
         </div>
 
         <div class="col-12">
@@ -125,15 +127,6 @@
           <label for="spotMaxCapacity" class="form-label fw-semibold">Capacidade Máxima *</label>
           <input type="text" class="form-control" id="spotMaxCapacity" formControlName="max_capacity"
             placeholder="Capacidade máxima" [attr.disabled]="isEditing() ? '' : null" />
-        </div>
-
-        <div class="col-md-4">
-          <div class="form-check mt-2">
-            <input class="form-check-input" type="checkbox" id="spotTicket" formControlName="requires_ticket" />
-            <label class="form-check-label fw-semibold" for="spotTicket">
-              Exige ingresso?
-            </label>
-          </div>
         </div>
 
         <div class="col-md-8">

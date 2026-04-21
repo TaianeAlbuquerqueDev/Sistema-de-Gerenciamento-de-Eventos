@@ -34,16 +34,44 @@ export class EventDetail implements OnInit {
     });
   }
 
-  register(): void {
+  // register(): void {
+  //   this.isRegistering.set(true);
+
+  //   setTimeout(() => {
+  //     this.registered.set(true);
+  //     this.isRegistering.set(false);
+  //   }, 1000);
+  // }
+
+   register(): void {
+    const current = this.event();
+    if (!current) return;
+    if (current.registered_count >= current.max_capacity) return;
+
     this.isRegistering.set(true);
 
-    setTimeout(() => {
-      this.registered.set(true);
-      this.isRegistering.set(false);
-    }, 1000);
+    // Atualiza o contador via API
+    this.eventService.update(current.id, {
+      registered_count: current.registered_count + 1
+    }).subscribe({
+      next: (updated) => {
+        this.event.set(updated);       
+        this.registered.set(true);
+        this.isRegistering.set(false);
+      },
+      error: () => {
+        // Se a API não suportar, atualiza localmente
+        this.event.set({
+          ...current,
+          registered_count: current.registered_count + 1
+        });
+        this.registered.set(true);
+        this.isRegistering.set(false);
+      }
+    });
   }
 
   goBack(): void {
-    this.router.navigate(['/']);
+    this.router.navigate(['/home']);
   }
 }

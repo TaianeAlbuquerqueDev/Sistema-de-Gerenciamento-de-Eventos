@@ -12,6 +12,5 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes, withHashLocation()),
 
     provideHttpClient(withInterceptors([authInterceptor]))
-    //NATHAN PEDIU PRA DEIXAR ESSE PARÊNTESES DEBAIXO VAZIO, QUALQUER COISA APAGAR ou colocar no parentese: provideHttpClient(withInterceptors([authInterceptor]))
   ]
 };

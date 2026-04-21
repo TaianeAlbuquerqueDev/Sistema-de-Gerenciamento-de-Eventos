@@ -12,5 +12,4 @@ import { EventFilters } from '../../services/event';
   styleUrls: ['./event-card.css']
 })
 export class EventCard {
-event = input.required<EventFilters>();
-}
+event = input<EventFilters | undefined>();}

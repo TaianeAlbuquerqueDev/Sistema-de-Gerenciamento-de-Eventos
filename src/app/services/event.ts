@@ -31,18 +31,27 @@ export class EventService {
     //     return this.http.get(this.apiUrl + this.publicUrl);
     // }
 
+    // getAll(filters?: any): Observable<EventFilters[]> {
+    //     let params = new HttpParams();
+
+    //     if (filters) {
+    //         if (filters.date_time) {
+    //             params = params.set('date_time', filters.date_time);
+    //         }
+    //         if (filters.category) {
+    //             params = params.set('category', filters.category);
+    //         }
+    //     }
+
+    //     return this.http.get<EventFilters[]>(`${this.apiUrl}/events`, { params });
+    // }
+
     getAll(filters?: any): Observable<EventFilters[]> {
         let params = new HttpParams();
-
-        if (filters) {
-            if (filters.date_time) {
-                params = params.set('date_time', filters.date_time);
-            }
-            if (filters.category) {
-                params = params.set('category', filters.category);
-            }
-        }
-
+        if (filters?.name) params = params.set('name', filters.name);
+        if (filters?.category) params = params.set('category', filters.category);
+        if (filters?.date_time) params = params.set('date', filters.date_time);
+        if (filters?.max_capacity) params = params.set('max_capacity', filters.max_capacity);
         return this.http.get<EventFilters[]>(`${this.apiUrl}/events`, { params });
     }
 
@@ -50,12 +59,12 @@ export class EventService {
         return this.http.get<EventFilters>(`${this.apiUrl}/events/${id}`);
     }
 
-    create(formData: FormData): Observable<EventFilters> {
-        return this.http.post<EventFilters>(`${this.apiUrl}/admin/events`, formData);
+    create(data: any): Observable<EventFilters> {
+        return this.http.post<EventFilters>(`${this.apiUrl}/admin/events`, data);
     }
 
-    update(id: number, formData: FormData): Observable<EventFilters> {
-        return this.http.put<EventFilters>(`${this.apiUrl}/admin/events/${id}`, formData);
+    update(id: number, data: any): Observable<EventFilters> {
+        return this.http.put<EventFilters>(`${this.apiUrl}/admin/events/${id}`, data);
     }
 
     delete(id: number): Observable<void> {

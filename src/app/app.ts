@@ -1,13 +1,29 @@
-import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { Navbar } from "./components/navbar/navbar";
+import { Component, inject } from '@angular/core';
+import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
+import { Navbar } from './components/navbar/navbar';
+import { CommonModule } from '@angular/common';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Navbar],
+  standalone: true,
+  imports: [RouterOutlet, Navbar, CommonModule],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
 export class App {
-  protected readonly title = signal('event-it');
+  private router = inject(Router);
+  currentUrl = '';
+
+  constructor() {
+    this.router.events.pipe(
+      filter(e => e instanceof NavigationEnd)
+    ).subscribe((e: any) => {
+      this.currentUrl = e.urlAfterRedirects;
+    });
+  }
+
+  isAdminRoute(): boolean {
+    return this.currentUrl.startsWith('/admin');
+  }
 }
