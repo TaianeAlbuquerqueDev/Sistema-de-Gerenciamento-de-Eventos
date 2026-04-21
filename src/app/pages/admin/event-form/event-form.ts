@@ -1,5 +1,3 @@
-
-
 import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -14,9 +12,9 @@ import { EventFilters, EventService } from '../../../services/event';
   styleUrl: './event-form.css',
 })
 export class EventForm implements OnInit {
-onFilesSelected($event: Event) {
-throw new Error('Method not implemented.');
-}
+  onFilesSelected($event: Event) {
+    throw new Error('Method not implemented.');
+  }
 
   private eventService = inject(EventService);
   private fb = inject(FormBuilder);
@@ -91,54 +89,58 @@ throw new Error('Method not implemented.');
       }
     });
   }
-onSubmit(): void {
-  if (this.spotForm.invalid) return;
 
-  this.isSubmitting.set(true);
-  this.clearMessages();
+  onSubmit(): void {
+    if (this.spotForm.invalid) return;
 
-  const values = this.spotForm.value;
+    this.isSubmitting.set(true);
+    this.clearMessages();
 
-  const payload = {
-    name: values.name,
-    category: values.category,
-    date_time: values.date_time,
-    location: values.location,
-    max_capacity: Number(values.max_capacity),
-    description: values.description || '',
-  };
+    const values = this.spotForm.value;
 
-  if (this.isEditing()) {
-    const id = this.editingSpot()!.id;
-    this.eventService.update(id, payload).subscribe({
-      next: () => {
-        this.successMessage.set('Evento atualizado com sucesso!');
-        this.isSubmitting.set(false);
-        this.cancelEdit();
-        this.loadSpots();
-      },
-      error: (err) => {
-        console.log('ERRO BODY:', err.error);
-        this.errorMessage.set(err.error?.error || 'Erro ao atualizar evento.');
-        this.isSubmitting.set(false);
-      }
-    });
-  } else {
-    this.eventService.create(payload).subscribe({
-      next: () => {
-        this.successMessage.set('Evento criado com sucesso!');
-        this.isSubmitting.set(false);
-        this.spotForm.reset({ requires_ticket: false });
-        this.loadSpots();
-      },
-      error: (err) => {
-        console.log('ERRO BODY:', err.error);
-        this.errorMessage.set(err.error?.error || 'Erro ao criar evento.');
-        this.isSubmitting.set(false);
-      }
-    });
+    const payload = {
+      name: values.name,
+      category: values.category,
+      date_time: values.date_time,
+      location: values.location,
+      max_capacity: Number(values.max_capacity),
+      description: values.description || '',
+    };
+
+    if (this.isEditing()) {
+      const id = this.editingSpot()!.id;
+      this.eventService.update(id, payload).subscribe({
+        next: () => {
+          this.successMessage.set('Evento atualizado com sucesso!');
+          this.isSubmitting.set(false);
+          this.cancelEdit();
+          this.loadSpots();
+        },
+        error: (err) => {
+          console.log('ERRO BODY:', err.error);
+          this.errorMessage.set(err.error?.error || 'Erro ao atualizar evento.');
+          this.isSubmitting.set(false);
+        }
+      });
+  
+
+    } else {
+      this.eventService.create(payload).subscribe({
+        next: () => {
+          this.successMessage.set('Evento criado com sucesso!');
+          this.isSubmitting.set(false);
+          this.spotForm.reset({ requires_ticket: false });
+          this.loadSpots();
+        },
+        error: (err) => {
+          console.log('ERRO BODY:', err.error);
+          this.errorMessage.set(err.error?.error || 'Erro ao criar evento.');
+          this.isSubmitting.set(false);
+        }
+      });
+    }
   }
-}
+
 
   private clearMessages(): void {
     this.successMessage.set('');
