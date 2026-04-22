@@ -21,18 +21,6 @@ export class EventDetail implements OnInit {
   isRegistering = signal(false);
   registered = signal(false);
 
-  // ngOnInit(): void {
-  //   const id = Number(this.route.snapshot.paramMap.get('id'));
-  //   this.eventService.getById(id).subscribe({
-  //     next: (data) => {
-  //       this.event.set(data);
-  //       this.isLoading.set(false);
-  //     },
-  //     error: () => {
-  //       this.isLoading.set(false);
-  //     }
-  //   });
-  // }
 
   ngOnInit(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
@@ -50,32 +38,6 @@ export class EventDetail implements OnInit {
       error: () => this.isLoading.set(false)
     });
   }
-
-  //  register(): void {
-  //   const current = this.event();
-  //   if (!current) return;
-  //   if (current.registered_count >= current.max_capacity) return;
-
-  //   this.isRegistering.set(true);
-
-  //   this.eventService.update(current.id, {
-  //     registered_count: current.registered_count + 1
-  //   }).subscribe({
-  //     next: (updated) => {
-  //       this.event.set(updated);       
-  //       this.registered.set(true);
-  //       this.isRegistering.set(false);
-  //     },
-  //     error: () => {
-  //       this.event.set({
-  //         ...current,
-  //         registered_count: current.registered_count + 1
-  //       });
-  //       this.registered.set(true);
-  //       this.isRegistering.set(false);
-  //     }
-  //   });
-  // }
 
   register(): void {
     const current = this.event();

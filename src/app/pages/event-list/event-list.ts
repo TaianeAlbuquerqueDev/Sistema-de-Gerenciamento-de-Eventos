@@ -4,7 +4,6 @@ import { ReactiveFormsModule, FormBuilder, FormGroup } from "@angular/forms";
 import { RouterModule } from "@angular/router";
 import { EventCard } from "../../components/event-card/event-card";
 import { EventFilters, EventService } from "../../services/event";
-import { max } from "rxjs";
 
 @Component({
   selector: 'app-event-list',
@@ -22,9 +21,6 @@ export class EventList implements OnInit {
 
   private eventService = inject(EventService);
   private fb = inject(FormBuilder);
-
-  // spots = signal<EventModel[]>([]);
-  // isLoading = signal(true);
 
   spots = signal<EventFilters[]>([]);
   isLoading = signal(true);
@@ -44,14 +40,9 @@ export class EventList implements OnInit {
     })
   }
 
-  // ngOnInit(): void {
-  //   this.loadSpots();
-  // }
-
   applyFilters(): void {
     this.loadSpots();
   }
-
 
   private loadSpots(): void {
     this.isLoading.set(true);
