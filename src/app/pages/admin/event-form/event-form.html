@@ -100,20 +100,26 @@
             <option value="Workshop">Workshop</option>
             <option value="Palestra">Palestra</option>
             <option value="Conferência">Conferência</option>
-            <option value="Disponibilidade">Disponibilidade</option>
           </select>
         </div>
-
-        <div class="col-12">
-          <label for="spotDateTime" class="form-label fw-semibold">Data e Hora *</label>
-          <input type="datetime-local" class="form-control" id="spotDateTime" formControlName="date_time" />
+        <div class="col-md-12">
+          <label for="spotMaxCapacity" class="form-label fw-semibold">Capacidade Máxima *</label>
+          <input type="text" class="form-control" id="spotMaxCapacity" formControlName="max_capacity"
+            placeholder="Capacidade máxima" [attr.disabled]="isEditing() ? '' : null" />
         </div>
+        
 
         <div class="col-12">
           <label for="spotLocation" class="form-label fw-semibold">Localização *</label>
           <input type="text" class="form-control" id="spotLocation" formControlName="location" placeholder="Endereço">
         </div>
 
+        
+        <div class="col-12">
+          <label for="spotDateTime" class="form-label fw-semibold">Data e Hora *</label>
+          <input type="datetime-local" class="form-control" id="spotDateTime" formControlName="date_time" />
+        </div>
+        
         <div class="col-12">
           <label for="spotDescription" class="form-label fw-semibold">Descrição *</label>
           <textarea class="form-control" id="spotDescription" formControlName="description" rows="3" maxlength="200"
@@ -123,13 +129,8 @@
           </div>
         </div>
 
-        <div class="col-md-4">
-          <label for="spotMaxCapacity" class="form-label fw-semibold">Capacidade Máxima *</label>
-          <input type="text" class="form-control" id="spotMaxCapacity" formControlName="max_capacity"
-            placeholder="Capacidade máxima" [attr.disabled]="isEditing() ? '' : null" />
-        </div>
-
-        <div class="col-md-8">
+        <!-- IMAGEM NÃO PÔDE SER INCLUIDA, POIS API NÃO SUPORTA IMAGEM!: -->
+        <!-- <div class="col-md-8">
           <label for="spotImages" class="form-label fw-semibold">
             Imagens {{ isEditing() ? '(opcional — mantém as atuais se não selecionar)' : '*' }}
           </label>
@@ -148,7 +149,7 @@
             </div>
           </div>
           }
-        </div>
+        </div> -->
 
       </div>
 

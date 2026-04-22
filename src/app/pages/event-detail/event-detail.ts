@@ -21,52 +21,83 @@ export class EventDetail implements OnInit {
   isRegistering = signal(false);
   registered = signal(false);
 
+  // ngOnInit(): void {
+  //   const id = Number(this.route.snapshot.paramMap.get('id'));
+  //   this.eventService.getById(id).subscribe({
+  //     next: (data) => {
+  //       this.event.set(data);
+  //       this.isLoading.set(false);
+  //     },
+  //     error: () => {
+  //       this.isLoading.set(false);
+  //     }
+  //   });
+  // }
+
   ngOnInit(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
+
+    const checkLocal = localStorage.getItem(`event_reg_${id}`);
+    if (checkLocal === 'true') {
+      this.registered.set(true);
+    }
+
     this.eventService.getById(id).subscribe({
       next: (data) => {
         this.event.set(data);
         this.isLoading.set(false);
       },
-      error: () => {
-        this.isLoading.set(false);
-      }
+      error: () => this.isLoading.set(false)
     });
   }
 
-  // register(): void {
+  //  register(): void {
+  //   const current = this.event();
+  //   if (!current) return;
+  //   if (current.registered_count >= current.max_capacity) return;
+
   //   this.isRegistering.set(true);
 
-  //   setTimeout(() => {
-  //     this.registered.set(true);
-  //     this.isRegistering.set(false);
-  //   }, 1000);
+  //   this.eventService.update(current.id, {
+  //     registered_count: current.registered_count + 1
+  //   }).subscribe({
+  //     next: (updated) => {
+  //       this.event.set(updated);       
+  //       this.registered.set(true);
+  //       this.isRegistering.set(false);
+  //     },
+  //     error: () => {
+  //       this.event.set({
+  //         ...current,
+  //         registered_count: current.registered_count + 1
+  //       });
+  //       this.registered.set(true);
+  //       this.isRegistering.set(false);
+  //     }
+  //   });
   // }
 
-   register(): void {
+  register(): void {
     const current = this.event();
-    if (!current) return;
+    if (!current || this.isRegistering() || this.registered()) return;
     if (current.registered_count >= current.max_capacity) return;
 
     this.isRegistering.set(true);
 
-    // Atualiza o contador via API
     this.eventService.update(current.id, {
       registered_count: current.registered_count + 1
     }).subscribe({
       next: (updated) => {
-        this.event.set(updated);       
+        this.event.set(updated);
         this.registered.set(true);
         this.isRegistering.set(false);
+
+        const id = this.event()?.id;
+        localStorage.setItem(`event_reg_${id}`, 'true');
       },
       error: () => {
-        // Se a API não suportar, atualiza localmente
-        this.event.set({
-          ...current,
-          registered_count: current.registered_count + 1
-        });
-        this.registered.set(true);
         this.isRegistering.set(false);
+        alert('Erro ao realizar inscrição. Tente novamente.');
       }
     });
   }

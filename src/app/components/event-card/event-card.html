@@ -1,12 +1,14 @@
 <div class="card h-100 shadow-sm event-card">
 
-  @if (event()?.images && event()?.images!.length > 0) {
+  <!-- IMAGEM NÃO PÔDE SER INCLUIDA, POIS API NÃO SUPORTA IMAGEM!: -->
+  <!-- @if (event()?.images && event()?.images!.length > 0) {
   <img [src]="event()?.images![0].file_url" [alt]="event()?.name" class="card-img-top event-img" />
   } @else {
   <div class="card-img-top event-img bg-light d-flex align-items-center justify-content-center">
     <span class="text-muted" style="font-size: 3rem;">📷</span>
   </div>
-  }
+  } -->
+
   <div class="card-body d-flex flex-column">
 
     <div class="mb-2">
@@ -28,9 +30,7 @@
       } @else {
       <span class="badge bg-success">✅ Vagas disponíveis</span>
       }
-      <!-- @if ((event()?.registered_count ?? 0) >= (event()?.max_capacity ?? 0)) {
-      <span class="badge bg-danger ms-2">Vagas Esgotadas</span>
-      } -->
+      
       <a [routerLink]="['/events', event()?.id]" class="btn btn-primary btn-sm">
         Ver detalhes →
       </a>

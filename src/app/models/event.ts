@@ -10,5 +10,7 @@ export interface EventModel {
     created_at?: Date | string;
     updated_at?: Date | string;
     requires_ticket?: boolean;
-    images?: { id: number, file_url: string }[];
+
+    //IMAGEM NÃO PÔDE SER INCLUIDA, POIS API NÃO SUPORTA IMAGEM!
+    // images?: { id: number, file_url: string }[];
     }

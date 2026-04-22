@@ -141,7 +141,6 @@ export class EventForm implements OnInit {
     }
   }
 
-
   private clearMessages(): void {
     this.successMessage.set('');
     this.errorMessage.set('');

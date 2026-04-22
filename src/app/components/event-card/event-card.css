@@ -1,15 +1,7 @@
-/*
-  SpotCard — estilos mínimos para a imagem do card.
-  O Bootstrap 5 cuida do restante via classes no HTML.
-*/
 
-/* 
-  Mantém uma altura fixa para as imagens dos cards,
-  garantindo que todos os cards tenham a mesma altura.
-*/
 .spot-img {
     height: 200px;
-    object-fit: cover; /* Corta a imagem para preencher o espaço sem distorcer */
+    object-fit: cover;
   }
 
 

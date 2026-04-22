@@ -16,7 +16,8 @@
 
   } @else {
 
-    <!-- Imagem -->
+
+    <!--     IMAGEM NÃO PÔDE SER INCLUIDA, POIS API NÃO SUPORTA IMAGEM!:
     @if (event()!.images && event()!.images!.length > 0) {
       <img [src]="event()!.images![0].file_url" [alt]="event()!.name"
            class="img-fluid rounded-3 mb-4 w-100 detail-img" />
@@ -24,9 +25,8 @@
       <div class="detail-img-placeholder rounded-3 mb-4 d-flex align-items-center justify-content-center bg-light">
         <span style="font-size: 5rem;">📷</span>
       </div>
-    }
+    } -->
 
-    <!-- Datas -->
     <div class="card bg-light border-0 mb-4">
       <div class="card-body">
         <div class="row text-center">
@@ -42,24 +42,19 @@
       </div>
     </div>
 
-    <!-- Nome -->
     <h2 class="fw-bold mb-2">{{ event()!.name }}</h2>
 
-    <!-- Categoria e local -->
     <div class="mb-3">
       <span class="badge bg-secondary me-1">{{ event()!.category }}</span>
       <span class="badge bg-light text-dark border">📍 {{ event()!.location }}</span>
     </div>
 
-    <!-- Data -->
     <p class="text-muted mb-3">
       🗓️ {{ event()!.date_time | date:'dd/MM/yyyy HH:mm' }}
     </p>
 
-    <!-- Descrição -->
     <p class="lead mb-4">{{ event()!.description }}</p>
 
-    <!-- Capacidade -->
     <div class="card mb-4 p-3 border-0 bg-light rounded-3">
       <div class="d-flex justify-content-between align-items-center mb-1">
         <span class="text-muted small">Inscritos</span>
@@ -72,7 +67,6 @@
       </div>
     </div>
 
-    <!-- Botão de inscrição -->
     @if (registered()) {
       <div class="alert alert-success">🎉 Inscrição realizada com sucesso!</div>
     } @else {

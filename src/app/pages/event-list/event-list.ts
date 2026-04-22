@@ -35,19 +35,18 @@ export class EventList implements OnInit {
     availability: ['']
   });
 
-  // ngOnInit(): void {
-  //   this.eventService.getAll().subscribe({
-  //     next: (res) => {
-  //       this.spots.set(res);
-  //       this.isLoading.set(false);
-  //       console.log(this.spots);
-  //     }
-  //   })
-  // }
-
   ngOnInit(): void {
-    this.loadSpots();
+    this.eventService.getAll().subscribe({
+      next: (res) => {
+        this.spots.set(res);
+        this.isLoading.set(false);
+      }
+    })
   }
+
+  // ngOnInit(): void {
+  //   this.loadSpots();
+  // }
 
   applyFilters(): void {
     this.loadSpots();
