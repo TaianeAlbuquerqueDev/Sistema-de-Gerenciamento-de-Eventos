@@ -1,4 +1,4 @@
-<h2 class="fw-bold mb-4">📋 Gerenciar Eventos</h2>
+<!-- <h2 class="fw-bold mb-4">📋 Gerenciar Eventos</h2>
 
 @if (successMessage()) {
 <div class="alert alert-success alert-dismissible" role="alert">
@@ -127,7 +127,7 @@
           <div class="form-text">
             {{ spotForm.get('description')?.value?.length || 0 }} / 200 caracteres
           </div>
-        </div>
+        </div> -->
 
         <!-- IMAGEM NÃO PÔDE SER INCLUIDA, POIS API NÃO SUPORTA IMAGEM!: -->
         <!-- <div class="col-md-8">
@@ -151,7 +151,7 @@
           }
         </div> -->
 
-      </div>
+      <!-- </div>
 
       <div class="d-flex gap-2 mt-4">
         <button type="submit" class="btn btn-success" [disabled]="spotForm.invalid || isSubmitting()">
@@ -170,4 +170,198 @@
 
     </form>
   </div>
+</div> -->
+
+<!-- ===================== GERENCIAR EVENTOS ===================== -->
+
+<div class="d-flex align-items-baseline gap-3 mb-4">
+    <h2 class="fw-bold mb-0" style="color: #0f172a; font-size: 1.4rem; letter-spacing: -0.01em;">Gerenciar Eventos</h2>
+</div>
+
+@if (successMessage()) {
+<div class="alert rounded-3 border-0 mb-4 d-flex align-items-center gap-2"
+    style="background: #f0fdf4; color: #15803d; font-size: 0.875rem;" role="alert">
+    ✅ {{ successMessage() }}
+</div>
+}
+@if (errorMessage()) {
+<div class="alert rounded-3 border-0 mb-4 d-flex align-items-center gap-2"
+    style="background: #fef2f2; color: #b91c1c; font-size: 0.875rem;" role="alert">
+    ⚠️ {{ errorMessage() }}
+</div>
+}
+
+<!-- TABELA -->
+<div class="card border-0 rounded-3 mb-4" style="box-shadow: 0 2px 12px rgba(0,0,0,0.07);">
+    <div class="card-header border-0 rounded-top-3 d-flex align-items-center gap-2 px-4 py-3"
+        style="background: #0f172a;">
+        <span class="fw-semibold" style="color: #e2e8f0; font-size: 0.9rem; letter-spacing: 0.02em;">Eventos Cadastrados</span>
+    </div>
+    <div class="card-body p-0">
+
+        @if (isLoadingList()) {
+        <div class="text-center py-5">
+            <div class="spinner-border" style="color: #6366f1;" role="status">
+                <span class="visually-hidden">Carregando…</span>
+            </div>
+        </div>
+        } @else {
+
+        <div class="table-responsive">
+            <table class="table mb-0 align-middle" style="font-size: 0.875rem;">
+                <thead style="background: #f8fafc; border-bottom: 1px solid #e2e8f0;">
+                    <tr>
+                        <th class="px-4 py-3 fw-semibold" style="color: #374151; border: none;">Nome</th>
+                        <th class="px-4 py-3 fw-semibold" style="color: #374151; border: none;">Data</th>
+                        <th class="px-4 py-3 fw-semibold" style="color: #374151; border: none;">Vagas</th>
+                        <th class="px-4 py-3 fw-semibold" style="color: #374151; border: none;">Status</th>
+                        <th class="px-4 py-3 fw-semibold text-center" style="color: #374151; border: none;">Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @for (spot of spots(); track spot.id) {
+                    <tr style="border-bottom: 1px solid #f1f5f9;">
+                        <td class="px-4 py-3 fw-semibold" style="color: #0f172a; border: none;">{{ spot.name }}</td>
+                        <td class="px-4 py-3" style="color: #64748b; border: none;">{{ spot.date_time | date:'short' }}</td>
+                        <td class="px-4 py-3" style="color: #64748b; border: none;">{{ spot.registered_count }}/{{ spot.max_capacity }}</td>
+                        <td class="px-4 py-3" style="border: none;">
+                            @if (spot.registered_count >= spot.max_capacity) {
+                            <span class="rounded-2 px-2 py-1"
+                                style="background: #fef2f2; color: #b91c1c; font-size: 0.75rem; font-weight: 600;">
+                                Esgotado
+                            </span>
+                            } @else {
+                            <span class="rounded-2 px-2 py-1"
+                                style="background: #f0fdf4; color: #15803d; font-size: 0.75rem; font-weight: 600;">
+                                Disponível
+                            </span>
+                            }
+                        </td>
+                        <td class="px-4 py-3 text-center" style="border: none;">
+                            <button class="btn btn-sm rounded-2 me-1"
+                                style="border: 1px solid #e2e8f0; background: #fff; color: #6366f1; font-size: 0.78rem; padding: 4px 12px;"
+                                (click)="editSpot(spot)">
+                                Editar
+                            </button>
+                            <button class="btn btn-sm rounded-2"
+                                style="border: 1px solid #fecaca; background: #fef2f2; color: #b91c1c; font-size: 0.78rem; padding: 4px 12px;"
+                                (click)="deleteSpot(spot.id)">
+                                Excluir
+                            </button>
+                        </td>
+                    </tr>
+                    } @empty {
+                    <tr>
+                        <td colspan="5" class="text-center py-5" style="color: #94a3b8; font-size: 0.875rem; border: none;">
+                            Nenhum evento cadastrado ainda.
+                        </td>
+                    </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+        }
+
+    </div>
+</div>
+
+
+<!-- FORMULÁRIO -->
+<div class="card border-0 rounded-3" style="box-shadow: 0 2px 12px rgba(0,0,0,0.07);">
+
+    <div class="card-header border-0 rounded-top-3 d-flex align-items-center gap-2 px-4 py-3"
+        [style.background]="isEditing() ? '#fef3c7' : '#0f172a'">
+        <span class="fw-semibold"
+            style="font-size: 0.9rem; letter-spacing: 0.02em;"
+            [style.color]="isEditing() ? '#92400e' : '#e2e8f0'">
+            {{ isEditing() ? '✏️ Editando evento' : 'Novo evento' }}
+        </span>
+    </div>
+
+    <div class="card-body p-4">
+
+        <form [formGroup]="spotForm" (ngSubmit)="onSubmit()">
+            <div class="row g-3">
+
+                <div class="col-md-6">
+                    <label for="spotName" class="form-label fw-semibold" style="font-size: 0.82rem; color: #374151;">Nome *</label>
+                    <input type="text" class="form-control rounded-2"
+                        style="border-color: #e2e8f0; font-size: 0.875rem; padding: 10px 14px; background: #f8fafc;"
+                        id="spotName" formControlName="name" placeholder="Nome do evento"
+                        [attr.disabled]="isEditing() ? '' : null" />
+                </div>
+
+                <div class="col-md-6">
+                    <label for="spotCategory" class="form-label fw-semibold" style="font-size: 0.82rem; color: #374151;">Categoria *</label>
+                    <select class="form-select rounded-2"
+                        style="border-color: #e2e8f0; font-size: 0.875rem; padding: 10px 14px; background: #f8fafc;"
+                        id="spotCategory" formControlName="category">
+                        <option value="">Selecione...</option>
+                        <option value="Workshop">Workshop</option>
+                        <option value="Palestra">Palestra</option>
+                        <option value="Conferência">Conferência</option>
+                    </select>
+                </div>
+
+                <div class="col-md-12">
+                    <label for="spotMaxCapacity" class="form-label fw-semibold" style="font-size: 0.82rem; color: #374151;">Capacidade Máxima *</label>
+                    <input type="text" class="form-control rounded-2"
+                        style="border-color: #e2e8f0; font-size: 0.875rem; padding: 10px 14px; background: #f8fafc;"
+                        id="spotMaxCapacity" formControlName="max_capacity"
+                        placeholder="Capacidade máxima"
+                        [attr.disabled]="isEditing() ? '' : null" />
+                </div>
+
+                <div class="col-12">
+                    <label for="spotLocation" class="form-label fw-semibold" style="font-size: 0.82rem; color: #374151;">Localização *</label>
+                    <input type="text" class="form-control rounded-2"
+                        style="border-color: #e2e8f0; font-size: 0.875rem; padding: 10px 14px; background: #f8fafc;"
+                        id="spotLocation" formControlName="location" placeholder="Endereço">
+                </div>
+
+                <div class="col-12">
+                    <label for="spotDateTime" class="form-label fw-semibold" style="font-size: 0.82rem; color: #374151;">Data e Hora *</label>
+                    <input type="datetime-local" class="form-control rounded-2"
+                        style="border-color: #e2e8f0; font-size: 0.875rem; padding: 10px 14px; background: #f8fafc;"
+                        id="spotDateTime" formControlName="date_time" />
+                </div>
+
+                <div class="col-12">
+                    <label for="spotDescription" class="form-label fw-semibold" style="font-size: 0.82rem; color: #374151;">Descrição *</label>
+                    <textarea class="form-control rounded-2"
+                        style="border-color: #e2e8f0; font-size: 0.875rem; padding: 10px 14px; background: #f8fafc; resize: vertical;"
+                        id="spotDescription" formControlName="description" rows="3" maxlength="200"
+                        placeholder="Descreva o evento (máx. 200 caracteres)"></textarea>
+                    <div class="form-text" style="font-size: 0.78rem; color: #94a3b8;">
+                        {{ spotForm.get('description')?.value?.length || 0 }} / 200 caracteres
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="d-flex gap-2 mt-4 pt-2" style="border-top: 1px solid #f1f5f9;">
+                <button type="submit"
+                    class="btn rounded-2 fw-semibold px-4"
+                    style="background: #6366f1; color: #fff; border: none; font-size: 0.875rem; padding: 10px 20px;"
+                    [disabled]="spotForm.invalid || isSubmitting()">
+                    @if (isSubmitting()) {
+                    <span class="spinner-border spinner-border-sm me-1" role="status"></span>
+                    }
+                    {{ isEditing() ? 'Atualizar' : 'Criar evento' }}
+                </button>
+
+                @if (isEditing()) {
+                <button type="button"
+                    class="btn rounded-2 px-4"
+                    style="border: 1px solid #e2e8f0; background: #fff; color: #64748b; font-size: 0.875rem; padding: 10px 20px;"
+                    (click)="cancelEdit()">
+                    Cancelar
+                </button>
+                }
+            </div>
+
+        </form>
+    </div>
 </div>

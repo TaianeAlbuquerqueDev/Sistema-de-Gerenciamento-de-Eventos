@@ -1,4 +1,4 @@
-<div class="container py-4">
+<!-- <div class="container py-4">
   <button class="btn btn-outline-secondary btn-sm mb-4" (click)="goBack()">
     ← Voltar
   </button>
@@ -54,4 +54,87 @@
   </button>
   }
   }
+</div> -->
+
+
+<!-- ===================== PAGE DETAIL ===================== -->
+<div class="container py-5" style="max-width: 760px;">
+
+    <button class="btn btn-sm rounded-2 mb-4"
+        style="border: 1px solid #e2e8f0; color: #64748b; background: #fff; font-size: 0.82rem;"
+        (click)="goBack()">
+        ← Voltar
+    </button>
+
+    @if (isLoading()) {
+    <div class="text-center py-5">
+        <div class="spinner-border" style="color: #6366f1;" role="status">
+            <span class="visually-hidden">Carregando...</span>
+        </div>
+    </div>
+
+    } @else if (!event()) {
+    <div class="alert rounded-2 border-0" style="background: #fef2f2; color: #b91c1c; font-size: 0.9rem;">
+        Evento não encontrado.
+    </div>
+
+    } @else {
+
+    <h2 class="fw-bold mb-3" style="color: #0f172a; font-size: 1.7rem; letter-spacing: -0.02em; line-height: 1.3;">
+        {{ event()!.name }}
+    </h2>
+
+    <div class="d-flex gap-2 flex-wrap mb-4">
+        <span class="rounded-2 px-3 py-1"
+            style="background: #ede9fe; color: #5b21b6; font-size: 0.8rem; font-weight: 600;">
+            {{ event()!.category }}
+        </span>
+        <span class="rounded-2 px-3 py-1"
+            style="background: #f1f5f9; color: #475569; font-size: 0.8rem; font-weight: 500;">
+            📍 {{ event()!.location }}
+        </span>
+        <span class="rounded-2 px-3 py-1"
+            style="background: #f1f5f9; color: #475569; font-size: 0.8rem; font-weight: 500;">
+            🗓️ {{ event()!.date_time | date:'dd/MM/yyyy HH:mm' }}
+        </span>
+    </div>
+
+    <p class="mb-5" style="color: #475569; font-size: 1rem; line-height: 1.75;">{{ event()!.description }}</p>
+
+    <div class="rounded-3 p-4 mb-5" style="background: #f8fafc; border: 1px solid #e2e8f0;">
+        <div class="d-flex justify-content-between align-items-center mb-2">
+            <span style="color: #64748b; font-size: 0.85rem;">Inscritos</span>
+            <span class="fw-bold" style="font-size: 0.9rem; color: #0f172a;">
+                {{ event()!.registered_count }} / {{ event()!.max_capacity }}
+            </span>
+        </div>
+        <div class="progress rounded-pill" style="height: 6px; background: #e2e8f0;">
+            <div class="progress-bar rounded-pill" role="progressbar"
+                style="background: #6366f1;"
+                [style.width.%]="(event()!.registered_count / event()!.max_capacity) * 100">
+            </div>
+        </div>
+    </div>
+
+    @if (registered()) {
+    <div class="rounded-3 p-4 text-center"
+        style="background: #f0fdf4; border: 1px solid #bbf7d0; color: #15803d; font-size: 0.95rem; font-weight: 500;">
+        🎉 Inscrição realizada com sucesso!
+    </div>
+    } @else {
+    <button class="btn w-100 rounded-3 fw-semibold py-3"
+        style="background: #6366f1; color: #fff; border: none; font-size: 0.95rem; letter-spacing: 0.02em;"
+        (click)="register()"
+        [disabled]="isRegistering() || event()!.registered_count >= event()!.max_capacity">
+        @if (isRegistering()) {
+        <span class="spinner-border spinner-border-sm me-2"></span> Inscrevendo...
+        } @else if (event()!.registered_count >= event()!.max_capacity) {
+        Vagas esgotadas
+        } @else {
+        Inscrever-se no evento
+        }
+    </button>
+    }
+
+    }
 </div>

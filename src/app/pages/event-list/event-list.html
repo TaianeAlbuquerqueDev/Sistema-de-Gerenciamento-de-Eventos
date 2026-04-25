@@ -1,4 +1,4 @@
-<div class="container py-4">
+<!-- <div class="container py-4">
   <div class="d-flex justify-content-between align-items-center mb-4">
     <h2 class="fw-bold mb-0">🎫 Eventos Para Todos os Públicos!</h2>
   </div>
@@ -44,4 +44,75 @@
     }
   </div>
   }
+</div> -->
+
+
+<!-- ===================== HOME ===================== -->
+<div class="container py-3">
+
+    <div class="mb-3">
+        <h2 class="fw-bold mb-1" style="color: #0f172a; font-size: 1.6rem; letter-spacing: -0.01em;">Eventos Para Todos os Públicos</h2>
+        <p class="mb-0" style="color: #64748b; font-size: 0.95rem;">Encontre e inscreva-se nos melhores eventos</p>
+    </div>
+
+    <form [formGroup]="filterForm" (ngSubmit)="applyFilters()"
+        class="rounded-3 p-3 mb-5 row g-2 align-items-center"
+        style="background: #f1f5f9; border: 1px solid #e2e8f0;">
+
+        <div class="col-md-4">
+            <input type="text" class="form-control rounded-2 border-0"
+                style="background: #fff; font-size: 0.875rem; padding: 10px 14px; box-shadow: 0 1px 2px rgba(0,0,0,0.06);"
+                formControlName="name" placeholder="Buscar por nome..." />
+        </div>
+
+        <div class="col-md-3">
+            <select class="form-select rounded-2 border-0"
+                style="background: #fff; font-size: 0.875rem; padding: 10px 14px; box-shadow: 0 1px 2px rgba(0,0,0,0.06);"
+                formControlName="category">
+                <option value="">Todas as categorias</option>
+                <option value="Workshop">Workshop</option>
+                <option value="Palestra">Palestra</option>
+                <option value="Conferência">Conferência</option>
+            </select>
+        </div>
+
+        <div class="col-md-3">
+            <select class="form-select rounded-2 border-0"
+                style="background: #fff; font-size: 0.875rem; padding: 10px 14px; box-shadow: 0 1px 2px rgba(0,0,0,0.06);"
+                formControlName="availability">
+                <option value="">Disponibilidade</option>
+                <option value="available">Vagas disponíveis</option>
+                <option value="full">Vagas esgotadas</option>
+            </select>
+        </div>
+
+        <div class="col-md-2">
+            <button type="submit" class="btn w-100 rounded-2 fw-semibold"
+                style="background: #6366f1; color: #fff; border: none; padding: 10px; font-size: 0.875rem;">
+                Filtrar
+            </button>
+        </div>
+
+    </form>
+
+    @if (isLoading()) {
+    <div class="text-center py-5">
+        <div class="spinner-border" style="color: #6366f1;" role="status">
+            <span class="visually-hidden">Carregando...</span>
+        </div>
+    </div>
+    } @else if (spots().length === 0) {
+    <div class="text-center py-5">
+        <p style="color: #94a3b8; font-size: 0.95rem;">Nenhum evento encontrado para os filtros selecionados.</p>
+    </div>
+    } @else {
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        @for (event of spots(); track event.id) {
+        <div class="col">
+            <app-event-card [event]="event" />
+        </div>
+        }
+    </div>
+    }
+
 </div>
