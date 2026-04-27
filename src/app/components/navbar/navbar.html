@@ -1,44 +1,7 @@
-<!-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #000000; border-bottom: 1px solid #1e293b;">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">Event-It</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link" [routerLink]="['/home']">Home</a>
-                </li>
-                @if (authService.isLoggedIn()) {
-                <li class="nav-item">
-                    <a class="nav-link" [routerLink]="['/admin/events']"
-                        routerLinkActive="active fw-semibold">Dashboard</a>
-                </li>
-
-                <li class="nav-item">
-                    <button class="btn btn-danger ms-2" (click)="authService.logout()">Sair</button>
-                </li>
-                } @else {
-                <li class="nav-item">
-                    <a class="nav-link" [routerLink]="['/login']" routerLinkActive="active fw-semibold">Login</a>
-                </li>
-                }
-
-            </ul>
-        </div>
-    </div>
-</nav>
-
-<div class="navbar-spacer"></div> -->
-
-
-<!-- ===================== NAVBAR PRINCIPAL ===================== -->
-<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #0f172a; border-bottom: 1px solid #1e293b;">
-    <div class="container">
         <a class="navbar-brand fw-bold fs-5 d-flex align-items-center gap-2" href="#">
-            <span style="background: #6366f1; border-radius: 8px; padding: 4px 10px; font-size: 0.85rem; letter-spacing: 0.05em;">EVENT IT</span>
-            <!-- <span style="color: #e2e8f0; letter-spacing: 0.02em;">it</span> -->
+            <span style="background: #6366f1; border-radius: 8px; padding: 4px 10px; font-size: 0.85rem; letter-spacing: 0.05em;">🎫 EVENT IT</span>
         </a>
         <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

@@ -1,55 +1,3 @@
-<!-- <div class="card vw-100 m-auto mt-5" style="max-width: 520px;">
-
-    <div class="card-body p-4">
-
-        <div class="text-center mb-4">
-            <h2 class="card-title fw-bold">🎫 Event-It</h2>
-            <p class="text-muted">Faça login para acessar o painel administrativo</p>
-        </div>
-
-        @if (errorMessage()) {
-        <div class="alert alert-danger" role="alert">
-            ⚠️ {{ errorMessage() }}
-        </div>
-        }
-
-        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-
-            <div class="mb-3">
-                <label for="email" class="form-label">Email</label>
-                <input type="email" name="email" id="email" class="form-control" formControlName="email" placeholder="Digite o seu email"
-                    autocomplete="email" />
-            </div>
-
-            <div class="mb-3">
-                <label for="senha" class="form-label">Senha</label>
-                <input type="password" name="senha" id="senha" class="form-control" formControlName="password" placeholder="••••••••"
-                    autocomplete="current-password" />
-            </div>
-
-            <div class="mb-3">
-                <button type="submit" class="btn btn-primary w-100" [disabled]="loginForm.invalid || isLoading()">
-                    @if (isLoading()) {
-                    <span class="spinner-border spinner-border-sm me-2" role="status"></span>
-                    Entrando…
-                    } @else {
-                    Entrar
-                    }
-                </button>
-            </div>
-
-        </form>
-        <div class="text-center mt-3">
-            <a [routerLink]="['/home']" routerLinkActive="active fw-semibold" class="text-muted small">← Voltar aos eventos</a>
-        </div>
-
-    </div>
-
-</div> -->
-
-
-
-<!-- ===================== LOGIN ===================== -->
 <div class="d-flex align-items-center justify-content-center" style="min-height: 85vh; background-color: #f8fafc;">
     <div class="card border-0 rounded-3 p-2" style="width: 100%; max-width: 440px; box-shadow: 0 4px 24px rgba(0,0,0,0.08);">
 
@@ -57,10 +5,9 @@
 
             <div class="text-center mb-4">
                 <div class="d-inline-flex align-items-center gap-2 mb-3">
-                    <span style="background: #6366f1; border-radius: 10px; padding: 6px 14px; font-weight: 700; font-size: 1rem; letter-spacing: 0.06em; color: #fff;">🎫 EVENT IT</span>
-                    <!-- <span style="color: #0f172a; font-weight: 700; font-size: 1.1rem; letter-spacing: 0.02em;">it</span> -->
+                    <span style="background: #000000; border-radius: 10px; padding: 6px 14px; font-weight: 700; font-size: 1rem; letter-spacing: 0.06em; color: #fff;">🎫 EVENT IT</span>
                 </div>
-                <p class="mb-0" style="color: #64748b; font-size: 0.9rem;">Acesse o painel administrativo</p>
+                <p class="mb-0" style="color: #64748b; font-size: 0.9rem;">Faça login para acessar o painel administrativo</p>
             </div>
 
             @if (errorMessage()) {

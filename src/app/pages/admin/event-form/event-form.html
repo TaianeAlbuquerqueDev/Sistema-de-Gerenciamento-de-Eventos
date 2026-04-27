@@ -1,181 +1,5 @@
-<!-- <h2 class="fw-bold mb-4">📋 Gerenciar Eventos</h2>
-
-@if (successMessage()) {
-<div class="alert alert-success alert-dismissible" role="alert">
-  ✅ {{ successMessage() }}
-</div>
-}
-@if (errorMessage()) {
-<div class="alert alert-danger alert-dismissible" role="alert">
-  ⚠️ {{ errorMessage() }}
-</div>
-}
-
-<div class="card mb-4">
-  <div class="card-header bg-primary text-white fw-semibold">
-    📄 Eventos Cadastrados
-  </div>
-  <div class="card-body p-0">
-
-    @if (isLoadingList()) {
-    <div class="text-center py-4">
-      <div class="spinner-border text-primary" role="status">
-        <span class="visually-hidden">Carregando…</span>
-      </div>
-    </div>
-    } @else {
-
-    <div class="table-responsive">
-      <table class="table table-striped table-hover table-bordered mb-0">
-        <thead class="table-dark">
-          <tr>
-            <th>Nome</th>
-            <th>Data</th>
-            <th>Vagas Ocupadas/Totais</th>
-            <th>Status</th>
-            <th class="text-center">Ações</th>
-          </tr>
-        </thead>
-        <tbody>
-
-          @for (spot of spots(); track spot.id) {
-          <tr>
-            <td class="fw-semibold">{{ spot.name }}</td>
-            <td>{{ spot.date_time | date:'short' }}</td>
-            <td>{{ spot.registered_count }}/{{ spot.max_capacity }}</td>
-            <td>
-              @if (spot.registered_count >= spot.max_capacity) {
-              <span class="badge bg-danger ms-1">Vagas Esgotadas</span>
-              } @else {
-              <span class="badge bg-success">Vagas Disponíveis</span>
-              }
-            </td>
-            <td class="text-center">
-
-              <button class="btn btn-sm btn-outline-primary me-1" (click)="editSpot(spot)">
-                ✏️ Editar
-              </button>
-              <button class="btn btn-sm btn-outline-danger" (click)="deleteSpot(spot.id)">
-                🗑️ Excluir
-              </button>
-            </td>
-          </tr>
-          } @empty {
-          <tr>
-            <td colspan="5" class="text-center text-muted py-3">
-              Nenhum evento cadastrado ainda.
-            </td>
-          </tr>
-          }
-        </tbody>
-      </table>
-    </div>
-    }
-
-  </div>
-</div>
-
-
-<div class="card">
-
-  <div class="card-header fw-semibold" [class.bg-warning]="isEditing()" [class.bg-success]="!isEditing()"
-    [class.text-dark]="isEditing()" [class.text-white]="!isEditing()">
-    {{ isEditing() ? '✏️ Editando evento' : '➕ Novo evento' }}
-  </div>
-  <div class="card-body">
-
-    <form [formGroup]="spotForm" (ngSubmit)="onSubmit()">
-      <div class="row g-3">
-
-        <div class="col-md-6">
-          <label for="spotName" class="form-label fw-semibold">Nome *</label>
-          <input type="text" class="form-control" id="spotName" formControlName="name" placeholder="Nome do evento"
-            [attr.disabled]="isEditing() ? '' : null" />
-        </div>
-
-        <div class="col-md-6">
-          <label for="spotCategory" class="form-label fw-semibold">Categoria *</label>
-          <select class="form-select" id="spotCategory" formControlName="category">
-            <option value="">Selecione...</option>
-            <option value="Workshop">Workshop</option>
-            <option value="Palestra">Palestra</option>
-            <option value="Conferência">Conferência</option>
-          </select>
-        </div>
-        <div class="col-md-12">
-          <label for="spotMaxCapacity" class="form-label fw-semibold">Capacidade Máxima *</label>
-          <input type="text" class="form-control" id="spotMaxCapacity" formControlName="max_capacity"
-            placeholder="Capacidade máxima" [attr.disabled]="isEditing() ? '' : null" />
-        </div>
-        
-
-        <div class="col-12">
-          <label for="spotLocation" class="form-label fw-semibold">Localização *</label>
-          <input type="text" class="form-control" id="spotLocation" formControlName="location" placeholder="Endereço">
-        </div>
-
-        
-        <div class="col-12">
-          <label for="spotDateTime" class="form-label fw-semibold">Data e Hora *</label>
-          <input type="datetime-local" class="form-control" id="spotDateTime" formControlName="date_time" />
-        </div>
-        
-        <div class="col-12">
-          <label for="spotDescription" class="form-label fw-semibold">Descrição *</label>
-          <textarea class="form-control" id="spotDescription" formControlName="description" rows="3" maxlength="200"
-            placeholder="Descreva o evento (máx. 200 caracteres)"></textarea>
-          <div class="form-text">
-            {{ spotForm.get('description')?.value?.length || 0 }} / 200 caracteres
-          </div>
-        </div> -->
-
-        <!-- IMAGEM NÃO PÔDE SER INCLUIDA, POIS API NÃO SUPORTA IMAGEM!: -->
-        <!-- <div class="col-md-8">
-          <label for="spotImages" class="form-label fw-semibold">
-            Imagens {{ isEditing() ? '(opcional — mantém as atuais se não selecionar)' : '*' }}
-          </label>
-
-          <input type="file" class="form-control" id="spotImages" accept=".jpg,.png" multiple
-            (change)="onFilesSelected($event)" />
-          <div class="form-text">Máximo de 5 arquivos. Formatos: .jpg ou .png</div>
-
-          @if (isEditing() && editingSpot()?.images?.length) {
-          <div class="mt-2">
-            <small class="text-muted">Imagens atuais:</small>
-            <div class="d-flex flex-wrap gap-2 mt-1">
-              @for (img of editingSpot()!.images; track img.id) {
-              <img [src]="img.file_url" [alt]="'Imagem'" class="existing-thumb rounded border" />
-              }
-            </div>
-          </div>
-          }
-        </div> -->
-
-      <!-- </div>
-
-      <div class="d-flex gap-2 mt-4">
-        <button type="submit" class="btn btn-success" [disabled]="spotForm.invalid || isSubmitting()">
-          @if (isSubmitting()) {
-          <span class="spinner-border spinner-border-sm me-1" role="status"></span>
-          }
-          {{ isEditing() ? '💾 Atualizar' : '✅ Criar evento' }}
-        </button>
-
-        @if (isEditing()) {
-        <button type="button" class="btn btn-outline-secondary" (click)="cancelEdit()">
-          ✖ Cancelar edição
-        </button>
-        }
-      </div>
-
-    </form>
-  </div>
-</div> -->
-
-<!-- ===================== GERENCIAR EVENTOS ===================== -->
-
 <div class="d-flex align-items-baseline gap-3 mb-4">
-    <h2 class="fw-bold mb-0" style="color: #0f172a; font-size: 1.4rem; letter-spacing: -0.01em;">Gerenciar Eventos</h2>
+    <h2 class="fw-bold mb-0" style="color: #000000; font-size: 1.4rem; letter-spacing: -0.01em;">📋 Gerenciar Eventos</h2>
 </div>
 
 @if (successMessage()) {
@@ -191,11 +15,10 @@
 </div>
 }
 
-<!-- TABELA -->
-<div class="card border-0 rounded-3 mb-4" style="box-shadow: 0 2px 12px rgba(0,0,0,0.07);">
+<div class="card border-0 rounded-3 mb-4" style="box-shadow: 0 2px 12px rgba(0, 0, 0, 0.07);">
     <div class="card-header border-0 rounded-top-3 d-flex align-items-center gap-2 px-4 py-3"
-        style="background: #0f172a;">
-        <span class="fw-semibold" style="color: #e2e8f0; font-size: 0.9rem; letter-spacing: 0.02em;">Eventos Cadastrados</span>
+        style="background: #000000;">
+        <span class="fw-semibold" style="color: #e2e8f0; font-size: 0.9rem; letter-spacing: 0.02em;">📄 Eventos Cadastrados</span>
     </div>
     <div class="card-body p-0">
 
@@ -222,7 +45,7 @@
 
                     @for (spot of spots(); track spot.id) {
                     <tr style="border-bottom: 1px solid #f1f5f9;">
-                        <td class="px-4 py-3 fw-semibold" style="color: #0f172a; border: none;">{{ spot.name }}</td>
+                        <td class="px-4 py-3 fw-semibold" style="color: #000000; border: none;">{{ spot.name }}</td>
                         <td class="px-4 py-3" style="color: #64748b; border: none;">{{ spot.date_time | date:'short' }}</td>
                         <td class="px-4 py-3" style="color: #64748b; border: none;">{{ spot.registered_count }}/{{ spot.max_capacity }}</td>
                         <td class="px-4 py-3" style="border: none;">
@@ -242,12 +65,12 @@
                             <button class="btn btn-sm rounded-2 me-1"
                                 style="border: 1px solid #e2e8f0; background: #fff; color: #6366f1; font-size: 0.78rem; padding: 4px 12px;"
                                 (click)="editSpot(spot)">
-                                Editar
+                                ✏️ Editar
                             </button>
                             <button class="btn btn-sm rounded-2"
                                 style="border: 1px solid #fecaca; background: #fef2f2; color: #b91c1c; font-size: 0.78rem; padding: 4px 12px;"
                                 (click)="deleteSpot(spot.id)">
-                                Excluir
+                                🗑️ Excluir
                             </button>
                         </td>
                     </tr>
@@ -267,16 +90,14 @@
     </div>
 </div>
 
-
-<!-- FORMULÁRIO -->
-<div class="card border-0 rounded-3" style="box-shadow: 0 2px 12px rgba(0,0,0,0.07);">
+<div class="card border-0 rounded-3" style="box-shadow: 0 2px 12px rgba(0, 0, 0, 0.07);">
 
     <div class="card-header border-0 rounded-top-3 d-flex align-items-center gap-2 px-4 py-3"
-        [style.background]="isEditing() ? '#fef3c7' : '#0f172a'">
+        [style.background]="isEditing() ? '#fef3c7' : '#000000'">
         <span class="fw-semibold"
             style="font-size: 0.9rem; letter-spacing: 0.02em;"
             [style.color]="isEditing() ? '#92400e' : '#e2e8f0'">
-            {{ isEditing() ? '✏️ Editando evento' : 'Novo evento' }}
+            {{ isEditing() ? '✏️ Editando evento' : '➕ Novo evento' }}
         </span>
     </div>
 
@@ -349,7 +170,7 @@
                     @if (isSubmitting()) {
                     <span class="spinner-border spinner-border-sm me-1" role="status"></span>
                     }
-                    {{ isEditing() ? 'Atualizar' : 'Criar evento' }}
+                    {{ isEditing() ? '💾 Atualizar' : '✅ Criar evento' }}
                 </button>
 
                 @if (isEditing()) {

@@ -2,7 +2,6 @@ import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-
 export interface EventFilters {
     requires_ticket?: boolean;
     images?: { id: number, file_url: string }[];
@@ -22,29 +21,6 @@ export interface EventFilters {
 export class EventService {
     private http = inject(HttpClient);
     private apiUrl = "https://api-senai-angular.vercel.app/api";
-    // private publicUrl = "/events";
-    // private adminUrl = "/admin/events";
-
-
-    // getAll(filters?: EventFilters): Observable<any> {
-
-    //     return this.http.get(this.apiUrl + this.publicUrl);
-    // }
-
-    // getAll(filters?: any): Observable<EventFilters[]> {
-    //     let params = new HttpParams();
-
-    //     if (filters) {
-    //         if (filters.date_time) {
-    //             params = params.set('date_time', filters.date_time);
-    //         }
-    //         if (filters.category) {
-    //             params = params.set('category', filters.category);
-    //         }
-    //     }
-
-    //     return this.http.get<EventFilters[]>(`${this.apiUrl}/events`, { params });
-    // }
 
     getAll(filters?: any): Observable<EventFilters[]> {
         let params = new HttpParams();
