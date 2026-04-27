@@ -1,26 +1,14 @@
-  /* 
-  Remove margens padrão que alguns navegadores adicionam 
-*/
   body {
       margin: 0;
       padding: 0;
   }
 
-  /*
-  Criar um div com altura fixa (72px = altura da navbar)
-  que "empurra" o conteúdo para baixo.
-*/
   .navbar-spacer {
       height: 16px;
   }
 
-  /*  
-  Adiciona espaçamento vertical (padding) para que o conteúdo
-  não fique colado no topo e no rodapé da página.
-*/
+
   .se-page {
       padding-top: 2rem;
-      /* 2rem = 32px */
       padding-bottom: 3rem;
-      /* 3rem = 48px */
   }
