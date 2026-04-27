@@ -8,7 +8,7 @@
 
     @if (isLoading()) {
     <div class="text-center py-5">
-        <div class="spinner-border" style="color: #6366f1;" role="status">
+        <div class="spinner-border" style="color: oklch(49.1% 0.27 292.581)" role="status">
             <span class="visually-hidden">Carregando...</span>
         </div>
     </div>
@@ -26,7 +26,7 @@
 
     <div class="d-flex gap-2 flex-wrap mb-4">
         <span class="rounded-2 px-3 py-1"
-            style="background: #ede9fe; color: #5b21b6; font-size: 0.8rem; font-weight: 600;">
+            style="background: #ede9fe; color: oklch(49.1% 0.27 292.581); font-size: 0.8rem; font-weight: 600;">
             {{ event()!.category }}
         </span>
         <span class="rounded-2 px-3 py-1"
@@ -50,7 +50,7 @@
         </div>
         <div class="progress rounded-pill" style="height: 6px; background: #e2e8f0;">
             <div class="progress-bar rounded-pill" role="progressbar"
-                style="background: #6366f1;"
+                style="background: oklch(49.1% 0.27 292.581)"
                 [style.width.%]="(event()!.registered_count / event()!.max_capacity) * 100">
             </div>
         </div>
@@ -63,7 +63,7 @@
     </div>
     } @else {
     <button class="btn w-100 rounded-3 fw-semibold py-3"
-        style="background: #6366f1; color: #fff; border: none; font-size: 0.95rem; letter-spacing: 0.02em;"
+        style="background: oklch(49.1% 0.27 292.581); color: #fff; border: none; font-size: 0.95rem; letter-spacing: 0.02em;"
         (click)="register()"
         [disabled]="isRegistering() || event()!.registered_count >= event()!.max_capacity">
         @if (isRegistering()) {

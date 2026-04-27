@@ -2,7 +2,7 @@
     <div class="container-fluid px-4">
 
         <a class="navbar-brand fw-bold d-flex align-items-center gap-2" routerLink="/admin/events">
-            <span style="background: #6366f1; border-radius: 8px; padding: 4px 10px; font-size: 0.8rem; letter-spacing: 0.05em;">⚙️ PAINEL ADMIN</span>
+            <span style="background: oklch(49.1% 0.27 292.581); border-radius: 8px; padding: 4px 10px; font-size: 0.8rem; letter-spacing: 0.05em;">⚙️ PAINEL ADMIN</span>
         </a>
 
         <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#adminNav"
@@ -19,9 +19,10 @@
                 </a>
 
                 <a class="btn btn-sm rounded-2 px-3"
-                    style="border: 1px solid #6366f1; color: #a5b4fc; font-size: 0.85rem; background: transparent;"
+                    style="border: 1px solid oklch(49.1% 0.27 292.581); color: #a6b5ff; font-size: 0.85rem; background: transparent;"
                     routerLink="/admin/events" routerLinkActive="active"
-                    [routerLinkActiveOptions]="{ exact: true }">
+                    [routerLinkActiveOptions]="{ exact: true }"
+                    (click)="scrollToBottom()">
                     Novo Evento
                 </a>
 

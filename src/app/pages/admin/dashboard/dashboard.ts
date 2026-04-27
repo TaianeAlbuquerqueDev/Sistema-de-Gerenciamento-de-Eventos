@@ -11,5 +11,12 @@ import { Auth } from '../../../services/auth';
   styleUrls: ['./dashboard.css'],
 })
 export class Dashboard {
-    auth = inject(Auth);
+  auth = inject(Auth);
+
+
+  scrollToBottom(): void {
+    setTimeout(() => {
+      window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+    }, 100);
+  }
 }

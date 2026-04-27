@@ -24,7 +24,7 @@
 
         @if (isLoadingList()) {
         <div class="text-center py-5">
-            <div class="spinner-border" style="color: #6366f1;" role="status">
+            <div class="spinner-border" style="color: oklch(49.1% 0.27 292.581)" role="status">
                 <span class="visually-hidden">Carregando…</span>
             </div>
         </div>
@@ -63,7 +63,7 @@
                         </td>
                         <td class="px-4 py-3 text-center" style="border: none;">
                             <button class="btn btn-sm rounded-2 me-1"
-                                style="border: 1px solid #e2e8f0; background: #fff; color: #6366f1; font-size: 0.78rem; padding: 4px 12px;"
+                                style="border: 1px solid #e2e8f0; background: #fff; color: oklch(49.1% 0.27 292.581); font-size: 0.78rem; padding: 4px 12px;"
                                 (click)="editSpot(spot)">
                                 ✏️ Editar
                             </button>
@@ -165,7 +165,7 @@
             <div class="d-flex gap-2 mt-4 pt-2" style="border-top: 1px solid #f1f5f9;">
                 <button type="submit"
                     class="btn rounded-2 fw-semibold px-4"
-                    style="background: #6366f1; color: #fff; border: none; font-size: 0.875rem; padding: 10px 20px;"
+                    style="background: oklch(49.1% 0.27 292.581); color: #fff; border: none; font-size: 0.875rem; padding: 10px 20px;"
                     [disabled]="spotForm.invalid || isSubmitting()">
                     @if (isSubmitting()) {
                     <span class="spinner-border spinner-border-sm me-1" role="status"></span>
